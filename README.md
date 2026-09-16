@@ -1,1 +1,1 @@
-# freshhire
+# FreshHire
