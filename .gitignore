@@ -1,24 +1,88 @@
-# Compiled class file
+
+# ===== Java / Maven =====
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+ 
+# ===== Spring Boot =====
+HELP.md
+application-local.yml
+application-local.yaml
+application-local.properties
+ 
+# ===== IntelliJ IDEA =====
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+ 
+# ===== VS Code =====
+.vscode/
+ 
+# ===== Eclipse / Spring Tool Suite =====
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+ 
+# ===== macOS =====
+.DS_Store
+ 
+# ===== Secrets and local environment =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+ 
+# ===== Frontend (Next.js) =====
+node_modules/
+.next/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+coverage/
+ 
+# ===== Terraform =====
+# Keep .terraform.lock.hcl committed: it pins provider versions.
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+!*.example.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+*.tfplan
+ 
+# ===== Kubernetes =====
+kubeconfig
+*.kubeconfig
+ 
+# ===== Local data and temporary files =====
+docker-data/
+tmp/
+*.swp
+*~
