@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-collection-runs
+      author: svnadorozhnyi
+      changes:
+        - createTable:
+            tableName: collection_runs
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_collection_runs
+              - column:
+                  name: started_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: finished_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: status
+                  type: varchar(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: companies_total
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: companies_failed
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postings_seen
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postings_new
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postings_closed
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: snapshot_prefix
+                  type: TEXT
+              - column:
+                  name: error_summary
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: now()
+                  constraints:
+                    nullable: false
+        - sql:
+            sql: >-
+              ALTER TABLE collection_runs
+              ADD CONSTRAINT ck_collection_runs_status
+              CHECK (status IN ('RUNNING', 'SUCCESS', 'PARTIAL', 'FAILED'))
+        - sql:
+            sql: >-
+              ALTER TABLE collection_runs
+              ADD CONSTRAINT ck_collection_runs_finish_order
+              CHECK (finished_at IS NULL OR finished_at >= started_at)
+        - sql:
+            sql: >-
+              ALTER TABLE collection_runs
+              ADD CONSTRAINT ck_collection_runs_running_has_no_finish
+              CHECK ((status = 'RUNNING') = (finished_at IS NULL))
+        - sql:
+            sql: >-
+              ALTER TABLE collection_runs
+              ADD CONSTRAINT ck_collection_runs_counters_non_negative
+              CHECK (companies_total >= 0 AND companies_failed >= 0
+                     AND postings_seen >= 0 AND postings_new >= 0
+                     AND postings_closed >= 0)
+      rollback:
+        - dropTable:
+            tableName: collection_runs
