@@ -147,7 +147,7 @@
                 <version>0.8.15</version>
                 <executions>
                     <execution>
-                        <id>prepare-agant</id>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
