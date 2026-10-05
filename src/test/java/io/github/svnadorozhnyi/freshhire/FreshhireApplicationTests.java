@@ -9,7 +9,5 @@ import org.springframework.context.annotation.Import;
 class FreshhireApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
-
+    void contextLoads() {}
 }
